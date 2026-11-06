@@ -3,38 +3,293 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Toll Alert — Never miss a UK toll</title>
-<meta name="description" content="Toll Alert reminds you to pay UK road tolls and the London ULEZ charge after you drive through them.">
+<title>Toll Alert — Never forget a UK road charge again</title>
+<meta name="description" content="Toll Alert reminds you to pay UK road tolls, the ULEZ and the Congestion Charge after you drive through them, with a link straight to the official payment site. Avoid the toll fines.">
+<meta name="theme-color" content="#0A0806">
+<meta property="og:title" content="Toll Alert — Never forget a UK road charge again">
+<meta property="og:description" content="Drive through a UK toll or charging zone and Toll Alert reminds you to pay, with a link to the official site. Avoid the toll fines.">
+<meta property="og:image" content="https://tollalert.github.io/img/icon.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.jpg">
 <style>
-  body { font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1a1a1a; background: #fff; max-width: 680px; margin: 0 auto; padding: 48px 20px 64px; }
-  h1 { font-size: 36px; line-height: 1.2; margin: 0 0 8px; }
-  h2 { font-size: 20px; margin-top: 36px; }
-  .lead { font-size: 20px; color: #333; }
-  ul { padding-left: 20px; }
-  a { color: #0b57d0; }
-  footer { margin-top: 48px; color: #666; font-size: 15px; }
+  :root {
+    --bg: #0A0806;
+    --surface: #17130E;
+    --raised: #221B12;
+    --border: #2C2418;
+    --gold: #F3B815;
+    --gold-pressed: #D9A20A;
+    --gold-deep: #7A4B06;
+    --text: #F7F1E3;
+    --muted: #9C9484;
+    --danger: #FF6B5B;
+    --ink: #100C07;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--gold); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* top bar */
+  .bar { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); text-decoration: none; }
+  .brand img { width: 34px; height: 34px; border-radius: 8px; }
+  .bar nav a { color: var(--muted); text-decoration: none; margin-left: 22px; font-size: 15px; }
+  .bar nav a:hover { color: var(--text); }
+
+  /* hero */
+  .hero {
+    background: radial-gradient(900px 480px at 78% 12%, rgba(243,184,21,.20), transparent 70%),
+                linear-gradient(180deg, var(--bg) 0%, #120D07 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding: 28px 0 72px; }
+  h1 { font-size: clamp(34px, 5.2vw, 56px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 16px; }
+  .avoid { color: var(--gold); font-weight: 800; letter-spacing: .04em; font-size: clamp(18px, 2.4vw, 24px); margin: 0 0 22px; }
+  .lead { font-size: 20px; color: rgba(247,241,227,.78); max-width: 34em; margin: 0 0 26px; }
+  .stat {
+    display: inline-block; border: 1px solid var(--danger); background: rgba(255,107,91,.10);
+    color: var(--danger); font-weight: 800; letter-spacing: .03em; text-transform: uppercase;
+    padding: 14px 20px; border-radius: 16px; font-size: 16px; line-height: 1.35; margin-bottom: 28px;
+  }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn {
+    display: inline-block; background: var(--gold); color: var(--ink); font-weight: 800; letter-spacing: .02em;
+    padding: 15px 26px; border-radius: 14px; text-decoration: none; box-shadow: 0 0 28px rgba(243,184,21,.25);
+  }
+  .btn:hover { background: var(--gold-pressed); }
+  .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); box-shadow: none; }
+  .btn.ghost:hover { border-color: var(--gold); }
+  .soon { color: var(--muted); font-size: 15px; margin: 14px 0 0; }
+
+  /* phones */
+  .phone {
+    width: 100%; max-width: 270px; border-radius: 38px; padding: 9px;
+    background: linear-gradient(145deg, #3a3023, #14100a); border: 1px solid #3b3020;
+    box-shadow: 0 30px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(0,0,0,.6);
+  }
+  .phone img { display: block; width: 100%; height: auto; border-radius: 30px; }
+  .hero-phones { position: relative; display: flex; justify-content: center; min-height: 680px; }
+  .hero-phones .phone { position: absolute; }
+  .hero-phones .back { left: 4%; top: 46px; transform: rotate(-6deg); opacity: .96; }
+  .hero-phones .front { right: 4%; top: 0; transform: rotate(4deg); z-index: 2; }
+
+  /* sections */
+  section { padding: 76px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  .eyebrow { color: var(--gold); font-weight: 800; letter-spacing: .12em; font-size: 14px; text-transform: uppercase; margin: 0 0 8px; }
+  h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.12; letter-spacing: -.015em; margin: 0 0 14px; }
+  .sub { color: rgba(247,241,227,.72); max-width: 38em; margin: 0 0 36px; font-size: 18px; }
+
+  /* how it works */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .steps { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; counter-reset: s; }
+  .steps li {
+    counter-increment: s; position: relative; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 18px; padding: 18px 20px 18px 66px;
+  }
+  .steps li::before {
+    content: counter(s); position: absolute; left: 18px; top: 18px; width: 32px; height: 32px; border-radius: 50%;
+    background: var(--gold); color: var(--ink); font-weight: 800; display: grid; place-items: center;
+  }
+  .steps h3 { margin: 0 0 4px; font-size: 18px; color: var(--gold); }
+  .steps p { margin: 0; font-size: 16px; color: rgba(247,241,227,.78); }
+
+  /* alert strip */
+  .alerts { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .notif {
+    background: #15110b; border: 1px solid var(--border); border-radius: 22px; padding: 16px 18px; max-width: 440px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.45);
+  }
+  .notif .top { display: flex; justify-content: space-between; font-size: 13px; letter-spacing: .08em; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+  .notif .title { font-weight: 800; font-size: 19px; margin: 6px 0 4px; }
+  .notif .body { color: rgba(247,241,227,.7); margin: 0 0 12px; }
+  .notif .pay { display: inline-block; background: var(--gold); color: var(--ink); font-weight: 800; border-radius: 9px; padding: 6px 14px; font-size: 15px; }
+
+  /* tolls */
+  .tolls { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .tolls li { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+  .tolls .dot { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px rgba(243,184,21,.5); }
+  .tolls small { display: block; font-weight: 400; color: var(--muted); font-size: 14px; }
+  .tolls .zone .dot { border-radius: 4px; }
+
+  /* screens */
+  .screens { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; }
+  .screens figure { margin: 0; text-align: center; width: 250px; }
+  .screens figcaption { margin-top: 14px; color: var(--muted); font-size: 15px; }
+
+  /* trust */
+  .cards { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 22px; }
+  .card h3 { margin: 0 0 8px; font-size: 19px; }
+  .card p { margin: 0; color: rgba(247,241,227,.75); font-size: 16px; }
+  .note { margin-top: 28px; color: var(--muted); font-size: 15px; max-width: 46em; }
+
+  /* final CTA */
+  .final { text-align: center; background: linear-gradient(180deg, transparent, rgba(122,75,6,.35)); }
+  .final h2 { margin-bottom: 10px; }
+  .final .cta { justify-content: center; margin-top: 24px; }
+
+  footer { border-top: 1px solid var(--border); padding: 30px 0 48px; color: var(--muted); font-size: 15px; }
+  footer a { color: var(--text); margin-right: 16px; }
+
+  @media (max-width: 860px) {
+    .hero-grid, .split, .alerts, .steps { grid-template-columns: 1fr; gap: 36px; }
+    .steps { gap: 14px; }
+    .hero-grid { padding-bottom: 48px; }
+    .hero-phones { min-height: 560px; order: 2; }
+    .hero-phones .phone { max-width: 220px; }
+    section { padding: 56px 0; }
+    .bar nav a:not(.keep) { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .stat { animation: pulse 3s ease-in-out infinite; }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 6px rgba(255,107,91,.14); } }
+  }
 </style>
 </head>
 <body>
-<h1>Toll Alert</h1>
-<p class="lead">Drive through a UK toll crossing or the London ULEZ, and Toll Alert reminds you to pay before it turns into a fine.</p>
 
-<h2>How it works</h2>
-<ul>
-  <li>Turn on monitoring once. Toll Alert watches for the crossings in the background.</li>
-  <li>When you pass through one, you get a notification with the pay-by deadline and a link to the operator's official payment site.</li>
-  <li>Tap "Mark as paid" and the reminder goes away.</li>
-</ul>
+<header class="hero">
+  <div class="wrap">
+    <div class="bar">
+      <a class="brand" href="./"><img src="img/icon.jpg" alt="" width="34" height="34">Toll Alert</a>
+      <nav><a href="#how">How it works</a><a href="#covered">Tolls we cover</a><a href="#private">Privacy</a><a class="keep" href="support.html">Support</a></nav>
+    </div>
 
-<h2>Crossings covered</h2>
-<p>Dartford Crossing, London ULEZ, Blackwall and Silvertown Tunnels, Mersey Gateway and Silver Jubilee Bridges, Tyne Tunnel, Humber Bridge and Warburton Toll Bridge.</p>
+    <div class="hero-grid">
+      <div>
+        <h1>Never forget a UK road charge again</h1>
+        <p class="avoid">AVOID THE TOLL FINES</p>
+        <p class="lead">Drive through a toll crossing, the ULEZ or the Congestion Charge zone and Toll Alert reminds you to pay, with a link straight to the official payment site.</p>
+        <div class="stat">Toll fines for 2025 over £450 million</div>
+        <div class="cta">
+          <a class="btn" href="#how">See how it works</a>
+          <a class="btn ghost" href="#covered">Tolls we cover</a>
+        </div>
+        <p class="soon">Coming soon to the App Store.</p>
+      </div>
+      <div class="hero-phones" aria-hidden="true">
+        <div class="phone back"><img src="img/screen-welcome.png" alt="" width="508" height="1100"></div>
+        <div class="phone front"><img src="img/screen-detail.png" alt="" width="508" height="1100"></div>
+      </div>
+    </div>
+  </div>
+</header>
 
-<h2>Private by design</h2>
-<p>Your location is processed on your phone and never sent anywhere. There are no accounts, no adverts and no tracking.</p>
+<main>
+  <section id="how">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">How it works</p>
+        <h2>Set it up once. Then forget it.</h2>
+        <ol class="steps">
+          <li>
+            <h3>It detects the crossing</h3>
+            <p>Toll Alert notices when you’ve crossed the bridge, tunnel, or toll road — running in the background, even with the app closed.</p>
+          </li>
+          <li>
+            <h3>It reminds you until you pay</h3>
+            <p>A phone notification reminds you at various times of the day that you have not yet paid your toll fee. You can set your own reminder times in Settings.</p>
+          </li>
+          <li>
+            <h3>It takes you to the right site</h3>
+            <p>Tap to pay and a link takes you straight to the official payment site, so you can’t get scammed by going to the wrong payment website.</p>
+          </li>
+          <li>
+            <h3>You tap “Paid” once you have</h3>
+            <p>That turns the reminder off. Toll Alert doesn’t check with Dart Charge or TfL — tapping “Paid” just tells the app you’ve paid, it doesn’t prove it.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap alerts">
+      <div>
+        <p class="eyebrow">The alert</p>
+        <h2>This is what the alert looks like</h2>
+        <p class="sub">The moment you cross, your phone tells you which crossing it was. One tap takes you to the official site to pay.</p>
+      </div>
+      <div class="notif" role="img" aria-label="Notification: Dartford Crossing detected — TAP TO PAY">
+        <div class="top"><span>Toll Alert</span><span>now</span></div>
+        <div class="title">Dartford Crossing detected — TAP TO PAY</div>
+        <p class="body">Pay on the official site. AVOID THE TOLL FINES.</p>
+        <span class="pay">TAP TO PAY</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="covered">
+    <div class="wrap">
+      <p class="eyebrow">Tolls we cover</p>
+      <h2>The crossings and zones that catch drivers out</h2>
+      <p class="sub">Every one of these is watched in the background. Payment deadlines and the official payment site for each are shown right in the app.</p>
+      <ul class="tolls">
+        <li><span class="dot"></span><span>Dartford Crossing<small>Dart Charge</small></span></li>
+        <li class="zone"><span class="dot"></span><span>Ultra Low Emission Zone (ULEZ)<small>London</small></span></li>
+        <li class="zone"><span class="dot"></span><span>Congestion Charge<small>Central London</small></span></li>
+        <li><span class="dot"></span><span>Blackwall Tunnel<small>Silvertown &amp; Blackwall Tunnels Charge</small></span></li>
+        <li><span class="dot"></span><span>Silvertown Tunnel<small>Silvertown &amp; Blackwall Tunnels Charge</small></span></li>
+        <li><span class="dot"></span><span>Mersey Gateway Bridge<small>Merseyflow</small></span></li>
+        <li><span class="dot"></span><span>Silver Jubilee Bridge<small>Merseyflow</small></span></li>
+        <li><span class="dot"></span><span>Tyne Tunnel<small>TT2</small></span></li>
+        <li><span class="dot"></span><span>Humber Bridge</span></li>
+        <li><span class="dot"></span><span>Warburton Toll Bridge</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">In the app</p>
+      <h2>Clear, calm and impossible to miss</h2>
+      <p class="sub">Dark, high-contrast screens made to be read at a glance, with a big gold button where it matters.</p>
+      <div class="screens">
+        <figure><div class="phone"><img src="img/screen-welcome.png" alt="Toll Alert welcome screen" width="508" height="1100"></div><figcaption>Never forget a UK road charge again</figcaption></figure>
+        <figure><div class="phone"><img src="img/screen-how.png" alt="The How it works screen in Toll Alert" width="508" height="1100"></div><figcaption>Four simple steps</figcaption></figure>
+        <figure><div class="phone"><img src="img/screen-detail.png" alt="Crossing detected screen with a Tap to pay button" width="508" height="1100"></div><figcaption>Pay-by deadline and one tap to pay</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="private">
+    <div class="wrap">
+      <p class="eyebrow">Private by design</p>
+      <h2>Your journeys stay on your phone</h2>
+      <div class="cards">
+        <div class="card"><h3>On-device detection</h3><p>Toll Alert only uses your location to spot the crossings in your list. It doesn’t track or store your journeys, and your location is never sent anywhere.</p></div>
+        <div class="card"><h3>No accounts, no adverts</h3><p>There is nothing to sign up for, nothing to sell and no tracking. Read the <a href="privacy.html">privacy policy</a> for the detail.</p></div>
+        <div class="card"><h3>Always the official site</h3><p>The pay button only ever opens the operator’s own website, never a copycat site that adds its own fees.</p></div>
+      </div>
+      <p class="note">Toll Alert is a reminder tool only. It can’t guarantee it will detect every crossing or that every alert will reach you, and you remain responsible for paying every toll, charge and penalty that applies to your journeys. Toll Alert is a subscription app billed through Apple; the price and any free trial are shown in the App Store before you subscribe, and you can cancel any time in your Apple ID settings.</p>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Never forget a UK road charge again</h2>
+      <p class="avoid" style="margin:0">AVOID THE TOLL FINES</p>
+      <div class="cta"><span class="btn">Coming soon to the App Store</span></div>
+    </div>
+  </section>
+</main>
 
 <footer>
-  <a href="support.html">Support</a> · <a href="privacy.html">Privacy policy</a><br>
-  Toll Alert is operated by Robert Huntley.
+  <div class="wrap">
+    <a href="support.html">Support</a><a href="privacy.html">Privacy policy</a><br>
+    <span>Toll Alert is operated by Robert Huntley.</span>
+  </div>
 </footer>
+
 </body>
 </html>
