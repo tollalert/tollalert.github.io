@@ -48,18 +48,25 @@
 <article>
 <p class="eyebrow">Legal</p>
 <h1>Privacy Policy</h1>
-<p class="updated">Last updated: 5 November 2026</p>
+<p class="updated">Last updated: 7 November 2026</p>
 
-<p>Toll Alert reminds you to pay UK road tolls and the London ULEZ charge after you drive through them. This policy explains what the app does with your information. In short: your location and everything else the app knows about you stays on your phone. Subscription payments are handled entirely by Apple.</p>
+<p>Toll Alert reminds you to pay UK road tolls and the London ULEZ charge after you drive through them. This policy explains what the app does with your information. In short: your location and everything else the app knows about you stays on your phone. The only exception is an optional diagnostics feature on Android test builds, described below. Subscription payments on iOS are handled entirely by Apple.</p>
 
 <h2>Location</h2>
-<p>With your permission, Toll Alert uses your device's location, including in the background, only to detect when you pass through a monitored toll crossing or enter the ULEZ. Location is processed on your device by the operating system's geofencing service. It is never sent to us or to anyone else, and the app does not keep a history of where you have been.</p>
+<p>With your permission, Toll Alert uses your device's location, including in the background, only to detect when you pass through a monitored toll crossing or enter the ULEZ. Location is processed on your device by the operating system's geofencing service. Toll Alert uses your location in the background, including when the app is closed or not in use, so it can alert you when you cross; this is the core purpose of the app. Your location is never sent to us or to anyone else. The app does not build a history of where you have been; its short on-device diagnostics log may contain recent location points and stays on your phone.</p>
 
 <h2>Data stored on your device</h2>
 <p>The app stores the following locally on your phone: the crossings it has detected (which crossing and when), whether you have marked each one as paid, your reminder times and settings, and a short diagnostics log of geofence events to help troubleshoot missed alerts. Deleting the app deletes all of this.</p>
 
 <h2>Subscriptions and purchases</h2>
 <p>Toll Alert is a subscription app. Payments are taken and processed by Apple through the App Store; we never see or store your card or payment details. To check that your subscription is active, and to restore it if you reinstall or change phone, the app asks Apple's App Store directly, using Apple's StoreKit framework on your device. We run no subscription server and use no third-party subscription or analytics service, so we receive no information about your purchases or about you. Family Sharing, if you use it, is run by Apple. You can manage or cancel your subscription at any time in your Apple ID settings (Settings → your name → Subscriptions).</p>
+
+<h2>Diagnostics (optional)</h2>
+<p>To help us fix missed alerts, the app can send its diagnostics log to a private Google Sheet that we own. It is off by default and only starts if you tap "I agree" in Settings → Diagnostics; you can turn it off at any time. When it is on, the app sends: log entries describing geofence events and the app's health (permissions, whether location services were on, whether monitoring was armed), with all coordinates removed before they leave your phone; a name, only if you type one in; a random identifier created when the app was installed; and the app version and phone operating system. We use this only to diagnose problems with the app. We do not sell or share it, and we delete it when it is no longer needed for that purpose. Contact us at the address below to have yours deleted.</p>
+
+<h2>Feedback emails</h2>
+<p>If you choose to send a crossing report or feedback, the app opens your own email app with a draft. Nothing is sent unless you send it, and we receive only what you write plus the phone model and app version shown in the draft.</p>
+
 <h2>Notifications</h2>
 <p>Alerts and payment reminders are scheduled locally on your device. We do not use push notification servers.</p>
 
