@@ -3,291 +3,138 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Toll Alert — Never forget a UK road charge again</title>
-<meta name="description" content="Toll Alert reminds you to pay UK road tolls, the ULEZ and the Congestion Charge after you drive through them, with a link straight to the official payment site. Avoid the toll fines.">
+<title>Pay Dart Charge, ULEZ &amp; UK Tolls: Official Payment Links | Toll Alert</title>
+<meta name="description" content="Go straight to the official site to pay the Dart Charge, ULEZ, Congestion Charge and UK toll crossings. No middlemen, no extra fees. Toll Alert reminds you to pay.">
+<link rel="canonical" href="https://tollalert.github.io/">
 <meta name="theme-color" content="#0A0806">
-<meta property="og:title" content="Toll Alert — Never forget a UK road charge again">
-<meta property="og:description" content="Drive through a UK toll or charging zone and Toll Alert reminds you to pay, with a link to the official site. Avoid the toll fines.">
+<meta property="og:title" content="Pay Dart Charge, ULEZ &amp; UK Tolls: Official Payment Links">
+<meta property="og:description" content="Straight to the official payment site. No scams, no extra fees. Toll Alert reminds you to pay.">
 <meta property="og:image" content="https://tollalert.github.io/img/icon.jpg">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I pay the Dart Charge?","acceptedAnswer":{"@type":"Answer","text":"Pay on the official GOV.UK site, https://www.gov.uk/pay-dartford-crossing-charge. You need your vehicle registration. Pay by midnight the day after you cross to avoid a penalty. Only use the GOV.UK site: copycat sites add their own fees."}},
+{"@type":"Question","name":"Is Toll Alert the official payment site?","acceptedAnswer":{"@type":"Answer","text":"No. Toll Alert is an independent reminder app. The buttons on this page open the official operator sites, where you pay. Toll Alert never takes payment and adds no fees."}}
+]}
+</script>
 <style>
-  :root {
-    --bg: #0A0806;
-    --surface: #17130E;
-    --raised: #221B12;
-    --border: #2C2418;
-    --gold: #F3B815;
-    --gold-pressed: #D9A20A;
-    --gold-deep: #7A4B06;
-    --text: #F7F1E3;
-    --muted: #9C9484;
-    --danger: #FF6B5B;
-    --ink: #100C07;
-  }
+  :root { --bg:#0A0806; --surface:#17130E; --border:#2C2418; --gold:#F3B815; --gold-pressed:#D9A20A; --text:#F7F1E3; --muted:#9C9484; --ink:#100C07; }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: var(--text);
-    background: var(--bg);
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: var(--gold); }
-  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
-
-  /* top bar */
-  .bar { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
-  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); text-decoration: none; }
-  .brand img { width: 34px; height: 34px; border-radius: 8px; }
-  .bar nav a { color: var(--muted); text-decoration: none; margin-left: 22px; font-size: 15px; }
-  .bar nav a:hover { color: var(--text); }
-
-  /* hero */
-  .hero {
-    background: radial-gradient(900px 480px at 78% 12%, rgba(243,184,21,.20), transparent 70%),
-                linear-gradient(180deg, var(--bg) 0%, #120D07 100%);
-    border-bottom: 1px solid var(--border);
-  }
-  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding: 28px 0 72px; }
-  h1 { font-size: clamp(34px, 5.2vw, 56px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 16px; }
-  .avoid { color: var(--gold); font-weight: 800; letter-spacing: .04em; font-size: clamp(18px, 2.4vw, 24px); margin: 0 0 22px; }
-  .lead { font-size: 20px; color: rgba(247,241,227,.78); max-width: 34em; margin: 0 0 26px; }
-  .stat {
-    display: inline-block; border: 1px solid var(--danger); background: rgba(255,107,91,.10);
-    color: var(--danger); font-weight: 800; letter-spacing: .03em; text-transform: uppercase;
-    padding: 14px 20px; border-radius: 16px; font-size: 16px; line-height: 1.35; margin-bottom: 28px;
-  }
-  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .btn {
-    display: inline-block; background: var(--gold); color: var(--ink); font-weight: 800; letter-spacing: .02em;
-    padding: 15px 26px; border-radius: 14px; text-decoration: none; box-shadow: 0 0 28px rgba(243,184,21,.25);
-  }
-  .btn:hover { background: var(--gold-pressed); }
-  .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); box-shadow: none; }
-  .btn.ghost:hover { border-color: var(--gold); }
-  .soon { color: var(--muted); font-size: 15px; margin: 14px 0 0; }
-
-  /* phones */
-  .phone {
-    width: 100%; max-width: 270px; border-radius: 38px; padding: 9px;
-    background: linear-gradient(145deg, #3a3023, #14100a); border: 1px solid #3b3020;
-    box-shadow: 0 30px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(0,0,0,.6);
-  }
-  .phone img { display: block; width: 100%; height: auto; border-radius: 30px; }
-  .hero-phones { position: relative; display: flex; justify-content: center; min-height: 680px; }
-  .hero-phones .phone { position: absolute; }
-  .hero-phones .back { left: 4%; top: 46px; transform: rotate(-6deg); opacity: .96; }
-  .hero-phones .front { right: 4%; top: 0; transform: rotate(4deg); z-index: 2; }
-
-  /* sections */
-  section { padding: 76px 0; }
-  section + section { border-top: 1px solid var(--border); }
-  .eyebrow { color: var(--gold); font-weight: 800; letter-spacing: .12em; font-size: 14px; text-transform: uppercase; margin: 0 0 8px; }
-  h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.12; letter-spacing: -.015em; margin: 0 0 14px; }
-  .sub { color: rgba(247,241,227,.72); max-width: 38em; margin: 0 0 36px; font-size: 18px; }
-
-  /* how it works */
-  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-  .steps { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; counter-reset: s; }
-  .steps li {
-    counter-increment: s; position: relative; background: var(--surface); border: 1px solid var(--border);
-    border-radius: 18px; padding: 18px 20px 18px 66px;
-  }
-  .steps li::before {
-    content: counter(s); position: absolute; left: 18px; top: 18px; width: 32px; height: 32px; border-radius: 50%;
-    background: var(--gold); color: var(--ink); font-weight: 800; display: grid; place-items: center;
-  }
-  .steps h3 { margin: 0 0 4px; font-size: 18px; color: var(--gold); }
-  .steps p { margin: 0; font-size: 16px; color: rgba(247,241,227,.78); }
-
-  /* alert strip */
-  .alerts { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-  .notif {
-    background: #15110b; border: 1px solid var(--border); border-radius: 22px; padding: 16px 18px; max-width: 440px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.45);
-  }
-  .notif .top { display: flex; justify-content: space-between; font-size: 13px; letter-spacing: .08em; font-weight: 700; color: var(--muted); text-transform: uppercase; }
-  .notif .title { font-weight: 800; font-size: 19px; margin: 6px 0 4px; }
-  .notif .body { color: rgba(247,241,227,.7); margin: 0 0 12px; }
-  .notif .pay { display: inline-block; background: var(--gold); color: var(--ink); font-weight: 800; border-radius: 9px; padding: 6px 14px; font-size: 15px; }
-
-  /* tolls */
-  .tolls { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
-  .tolls li { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
-  .tolls .dot { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px rgba(243,184,21,.5); }
-  .tolls small { display: block; font-weight: 400; color: var(--muted); font-size: 14px; }
-  .tolls .zone .dot { border-radius: 4px; }
-
-  /* screens */
-  .screens { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; }
-  .screens figure { margin: 0; text-align: center; width: 250px; }
-  .screens figcaption { margin-top: 14px; color: var(--muted); font-size: 15px; }
-
-  /* trust */
-  .cards { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 22px; }
-  .card h3 { margin: 0 0 8px; font-size: 19px; }
-  .card p { margin: 0; color: rgba(247,241,227,.75); font-size: 16px; }
-  .note { margin-top: 28px; color: var(--muted); font-size: 15px; max-width: 46em; }
-
-  /* final CTA */
-  .final { text-align: center; background: linear-gradient(180deg, transparent, rgba(122,75,6,.35)); }
-  .final h2 { margin-bottom: 10px; }
-  .final .cta { justify-content: center; margin-top: 24px; }
-
-  footer { border-top: 1px solid var(--border); padding: 30px 0 48px; color: var(--muted); font-size: 15px; }
-  footer a { color: var(--text); margin-right: 16px; }
-
-  @media (max-width: 860px) {
-    .hero-grid, .split, .alerts, .steps { grid-template-columns: 1fr; gap: 36px; }
-    .steps { gap: 14px; }
-    .hero-grid { padding-bottom: 48px; }
-    .hero-phones { min-height: 560px; order: 2; }
-    .hero-phones .phone { max-width: 220px; }
-    section { padding: 56px 0; }
-    .bar nav a:not(.keep) { display: none; }
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .stat { animation: pulse 3s ease-in-out infinite; }
-    @keyframes pulse { 50% { box-shadow: 0 0 0 6px rgba(255,107,91,.14); } }
-  }
+  body { margin:0; font:17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased; }
+  a { color:var(--gold); }
+  .wrap { max-width:900px; margin:0 auto; padding:0 20px; }
+  .top { background:radial-gradient(900px 320px at 80% 0%, rgba(243,184,21,.16), transparent 70%), var(--bg); border-bottom:1px solid var(--border); }
+  .bar { display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:700; font-size:18px; color:var(--text); text-decoration:none; }
+  .brand img { width:34px; height:34px; border-radius:8px; }
+  .bar nav a { color:var(--muted); text-decoration:none; margin-left:22px; font-size:15px; }
+  .bar nav a:hover { color:var(--text); }
+  .hero { padding:24px 0 48px; }
+  h1 { font-size:clamp(32px,5.5vw,52px); line-height:1.08; letter-spacing:-.02em; margin:0 0 14px; }
+  h1 span { color:var(--gold); }
+  .lead { font-size:19px; color:rgba(247,241,227,.82); margin:0; max-width:36em; }
+  section { padding:44px 0; border-top:1px solid var(--border); }
+  .top + main section:first-child { border-top:0; }
+  h2 { font-size:clamp(24px,3.2vw,32px); line-height:1.15; margin:0 0 8px; }
+  .sub { color:rgba(247,241,227,.72); margin:0 0 22px; }
+  .pay { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+  .pay a { display:flex; justify-content:space-between; align-items:center; gap:12px; text-decoration:none; color:var(--text); background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px 18px; font-weight:700; }
+  .pay a:hover { border-color:var(--gold); }
+  .pay small { display:block; font-weight:400; color:var(--muted); font-size:14px; }
+  .pay .go { flex:none; background:var(--gold); color:var(--ink); border-radius:10px; padding:6px 12px; font-size:14px; font-weight:800; }
+  .pay li.main a { background:var(--gold); border-color:var(--gold); color:var(--ink); }
+  .pay li.main small { color:rgba(16,12,7,.7); }
+  .pay li.main .go { background:var(--ink); color:var(--gold); }
+  .note { color:var(--muted); font-size:15px; margin:18px 0 0; }
+  .trust { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:18px 20px; }
+  .card h3 { margin:0 0 6px; font-size:18px; color:var(--gold); }
+  .card p { margin:0; font-size:16px; color:rgba(247,241,227,.78); }
+  .app { display:grid; grid-template-columns:1fr auto; gap:32px; align-items:center; }
+  .btn { display:inline-block; background:var(--gold); color:var(--ink); font-weight:800; padding:14px 24px; border-radius:14px; text-decoration:none; }
+  .btn:hover { background:var(--gold-pressed); }
+  .soon { color:var(--muted); font-size:15px; margin:12px 0 0; }
+  .phone { width:200px; border-radius:30px; padding:7px; background:linear-gradient(145deg,#3a3023,#14100a); border:1px solid #3b3020; }
+  .phone img { display:block; width:100%; height:auto; border-radius:24px; }
+  details { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:14px 18px; margin-bottom:10px; }
+  summary { cursor:pointer; font-weight:700; }
+  details p { margin:10px 0 0; color:rgba(247,241,227,.78); }
+  footer { border-top:1px solid var(--border); padding:28px 0 44px; color:var(--muted); font-size:14px; }
+  footer a { color:var(--text); margin-right:16px; }
+  footer p { margin:12px 0 0; max-width:48em; }
+  @media (max-width:640px) { .app { grid-template-columns:1fr; } .phone { display:none; } .bar nav a.opt { display:none; } }
 </style>
 </head>
 <body>
 
-<header class="hero">
+<header class="top">
   <div class="wrap">
     <div class="bar">
       <a class="brand" href="./"><img src="img/icon.jpg" alt="" width="34" height="34">Toll Alert</a>
-      <nav><a href="#how">How it works</a><a href="#covered">Tolls we cover</a><a href="#private">Privacy</a><a class="keep" href="support.html">Support</a></nav>
+      <nav><a class="opt" href="#app">The app</a><a class="opt" href="#faq">FAQ</a><a href="support.html">Support</a></nav>
     </div>
-
-    <div class="hero-grid">
-      <div>
-        <h1>Never forget a UK road charge again</h1>
-        <p class="avoid">AVOID THE TOLL FINES</p>
-        <p class="lead">Drive through a toll crossing, the ULEZ or the Congestion Charge zone and Toll Alert reminds you to pay, with a link straight to the official payment site.</p>
-        <div class="stat">Toll fines for 2025 over £450 million</div>
-        <div class="cta">
-          <a class="btn" href="#how">See how it works</a>
-          <a class="btn ghost" href="#covered">Tolls we cover</a>
-        </div>
-        <p class="soon">Coming soon to the App Store.</p>
-      </div>
-      <div class="hero-phones" aria-hidden="true">
-        <div class="phone back"><img src="img/screen-welcome.png" alt="" width="508" height="1100"></div>
-        <div class="phone front"><img src="img/screen-detail.png" alt="" width="508" height="1100"></div>
-      </div>
+    <div class="hero">
+      <h1>Pay your UK toll or charge on the <span>official site</span></h1>
+      <p class="lead">Press a button to go straight to the correct payment site. No scams. No extra fees.</p>
     </div>
   </div>
 </header>
 
 <main>
-  <section id="how">
-    <div class="wrap">
-      <div>
-        <p class="eyebrow">How it works</p>
-        <h2>Set it up once. Then forget it.</h2>
-        <ol class="steps">
-          <li>
-            <h3>It detects the crossing</h3>
-            <p>Toll Alert notices when you’ve crossed the bridge, tunnel, or toll road — running in the background, even with the app closed.</p>
-          </li>
-          <li>
-            <h3>It reminds you until you pay</h3>
-            <p>A phone notification reminds you at various times of the day that you have not yet paid your toll fee. You can set your own reminder times in Settings.</p>
-          </li>
-          <li>
-            <h3>It takes you to the right site</h3>
-            <p>Tap to pay and a link takes you straight to the official payment site, so you can’t get scammed by going to the wrong payment website.</p>
-          </li>
-          <li>
-            <h3>You tap “Paid” once you have</h3>
-            <p>That turns the reminder off. Toll Alert doesn’t check with Dart Charge or TfL — tapping “Paid” just tells the app you’ve paid, it doesn’t prove it.</p>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
   <section>
-    <div class="wrap alerts">
-      <div>
-        <p class="eyebrow">The alert</p>
-        <h2>This is what the alert looks like</h2>
-        <p class="sub">The moment you cross, your phone tells you which crossing it was. One tap takes you to the official site to pay.</p>
-      </div>
-      <div class="notif" role="img" aria-label="Notification: Dartford Crossing detected — TAP TO PAY">
-        <div class="top"><span>Toll Alert</span><span>now</span></div>
-        <div class="title">Dartford Crossing detected — TAP TO PAY</div>
-        <p class="body">Pay on the official site. AVOID THE TOLL FINES.</p>
-        <span class="pay">TAP TO PAY</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="covered">
     <div class="wrap">
-      <p class="eyebrow">Tolls we cover</p>
-      <h2>The crossings and zones that catch drivers out</h2>
-      <p class="sub">Every one of these is watched in the background. Payment deadlines and the official payment site for each are shown right in the app.</p>
-      <ul class="tolls">
-        <li><span class="dot"></span><span>Dartford Crossing<small>Dart Charge</small></span></li>
-        <li class="zone"><span class="dot"></span><span>Ultra Low Emission Zone (ULEZ)<small>London</small></span></li>
-        <li class="zone"><span class="dot"></span><span>Congestion Charge<small>Central London</small></span></li>
-        <li><span class="dot"></span><span>Blackwall Tunnel<small>Silvertown &amp; Blackwall Tunnels Charge</small></span></li>
-        <li><span class="dot"></span><span>Silvertown Tunnel<small>Silvertown &amp; Blackwall Tunnels Charge</small></span></li>
-        <li><span class="dot"></span><span>Mersey Gateway Bridge<small>Merseyflow</small></span></li>
-        <li><span class="dot"></span><span>Silver Jubilee Bridge<small>Merseyflow</small></span></li>
-        <li><span class="dot"></span><span>Tyne Tunnel<small>TT2</small></span></li>
-        <li><span class="dot"></span><span>Humber Bridge</span></li>
-        <li><span class="dot"></span><span>Warburton Toll Bridge</span></li>
+      <h2>Where do you need to pay?</h2>
+      <p class="sub">Each button opens the operator’s own website.</p>
+      <ul class="pay">
+        <li class="main"><a href="https://www.gov.uk/pay-dartford-crossing-charge" rel="noopener"><span>Pay Dart Charge<small>Dartford Crossing · GOV.UK</small></span><span class="go">Pay</span></a></li>
+        <li><a href="https://tfl.gov.uk/modes/driving/ultra-low-emission-zone" rel="noopener"><span>Pay ULEZ<small>London · TfL</small></span><span class="go">Pay</span></a></li>
+        <li><a href="https://tfl.gov.uk/modes/driving/congestion-charge" rel="noopener"><span>Pay Congestion Charge<small>Central London · TfL</small></span><span class="go">Pay</span></a></li>
+        <li><a href="https://tfl.gov.uk/modes/driving/silvertown-blackwall-tunnels-charge" rel="noopener"><span>Pay Blackwall &amp; Silvertown Tunnels<small>London · TfL</small></span><span class="go">Pay</span></a></li>
+        <li><a href="https://www.merseyflow.co.uk/" rel="noopener"><span>Pay Mersey Gateway &amp; Silver Jubilee<small>Merseyflow</small></span><span class="go">Pay</span></a></li>
+        <li><a href="https://www.tt2.co.uk/" rel="noopener"><span>Pay Tyne Tunnel<small>TT2</small></span><span class="go">Pay</span></a></li>
+        <li><a href="https://www.humberbridge.co.uk/" rel="noopener"><span>Pay Humber Bridge<small>Humber Bridge Board</small></span><span class="go">Pay</span></a></li>
+        <li><a href="https://www.warburtontollbridge.co.uk/" rel="noopener"><span>Pay Warburton Toll Bridge<small>Warburton Bridge</small></span><span class="go">Pay</span></a></li>
       </ul>
+      <p class="note">Toll Alert is independent and not affiliated with any operator, TfL or the government. Charges and deadlines are set by the operators, so check the official site.</p>
     </div>
   </section>
 
   <section>
-    <div class="wrap">
-      <p class="eyebrow">In the app</p>
-      <h2>Clear, calm and impossible to miss</h2>
-      <p class="sub">Dark, high-contrast screens made to be read at a glance, with a big gold button where it matters.</p>
-      <div class="screens">
-        <figure><div class="phone"><img src="img/screen-welcome.png" alt="Toll Alert welcome screen" width="508" height="1100"></div><figcaption>Never forget a UK road charge again</figcaption></figure>
-        <figure><div class="phone"><img src="img/screen-how.png" alt="The How it works screen in Toll Alert" width="508" height="1100"></div><figcaption>Four simple steps</figcaption></figure>
-        <figure><div class="phone"><img src="img/screen-detail.png" alt="Crossing detected screen with a Tap to pay button" width="508" height="1100"></div><figcaption>Pay-by deadline and one tap to pay</figcaption></figure>
-      </div>
+    <div class="wrap trust">
+      <div class="card"><h3>Official sites only</h3><p>Copycat sites add their own fees. These links go only to the operator’s own website.</p></div>
+      <div class="card"><h3>We never take payment</h3><p>You pay the operator directly. Toll Alert adds nothing on top.</p></div>
+      <div class="card"><h3>Miss one and you’re fined</h3><p>Late payment brings a penalty charge notice. Pay on time, or let the app remind you.</p></div>
     </div>
   </section>
 
-  <section id="private">
-    <div class="wrap">
-      <p class="eyebrow">Private by design</p>
-      <h2>Your journeys stay on your phone</h2>
-      <div class="cards">
-        <div class="card"><h3>On-device detection</h3><p>Toll Alert only uses your location to spot the crossings in your list. It doesn’t track or store your journeys, and your location is never sent anywhere.</p></div>
-        <div class="card"><h3>No accounts, no adverts</h3><p>There is nothing to sign up for, nothing to sell and no tracking. Read the <a href="privacy.html">privacy policy</a> for the detail.</p></div>
-        <div class="card"><h3>Always the official site</h3><p>The pay button only ever opens the operator’s own website, never a copycat site that adds its own fees.</p></div>
+  <section id="app">
+    <div class="wrap app">
+      <div>
+        <h2>Never forget to pay again</h2>
+        <p class="sub">The Toll Alert app notices when you drive through a toll or charging zone, then reminds you until you’ve paid, with one tap to the official site.</p>
+        <a class="btn" href="https://apps.apple.com/app/id6831310047" rel="noopener">Get it on the App Store</a>
+        <p class="soon">Android: coming soon to Google Play.</p>
       </div>
-      <p class="note">Toll Alert is a reminder tool only. It can’t guarantee it will detect every crossing or that every alert will reach you, and you remain responsible for paying every toll, charge and penalty that applies to your journeys. Toll Alert is a subscription app billed through Apple; the price and any free trial are shown in the App Store before you subscribe, and you can cancel any time in your Apple ID settings.</p>
+      <div class="phone" aria-hidden="true"><img src="img/screen-detail.png" alt="" width="508" height="1100"></div>
     </div>
   </section>
 
-  <section class="final">
+  <section id="faq">
     <div class="wrap">
-      <h2>Never forget a UK road charge again</h2>
-      <p class="avoid" style="margin:0">AVOID THE TOLL FINES</p>
-      <div class="cta"><span class="btn">Coming soon to the App Store</span></div>
+      <h2>Quick answers</h2>
+      <details open><summary>How do I pay the Dart Charge?</summary><p>Use the “Pay Dart Charge” button above, which opens the official GOV.UK page. Have your vehicle registration ready. Pay by midnight the day after you cross to avoid a penalty.</p></details>
+      <details><summary>Is Toll Alert the official payment site?</summary><p>No. It is an independent reminder app. Payment is always made on the operator’s official site.</p></details>
+      <details><summary>Does the app work when it’s closed?</summary><p>Yes. It detects crossings in the background and your location stays on your phone. See the <a href="privacy.html">privacy policy</a>.</p></details>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <a href="support.html">Support</a><a href="privacy.html">Privacy policy</a><br>
-    <span>Toll Alert is operated by Robert Huntley.</span>
+    <a href="support.html">Support</a><a href="privacy.html">Privacy policy</a>
+    <p>Toll Alert is operated by Robert Huntley. It is a reminder tool only and cannot guarantee that every crossing is detected or every alert received. You remain responsible for paying every charge that applies to your journeys.</p>
   </div>
 </footer>
 

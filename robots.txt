@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tollalert.github.io/sitemap.xml
